@@ -1,12 +1,12 @@
 -- CreateTable
-CREATE TABLE "user" (
+CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
     "name" TEXT,
     "email" TEXT,
     "cpf" INTEGER NOT NULL,
     "password" TEXT NOT NULL,
 
-    CONSTRAINT "user_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -20,13 +20,13 @@ CREATE TABLE "cars" (
 );
 
 -- CreateTable
-CREATE TABLE "car_enjoy" (
+CREATE TABLE "car_enjoys" (
     "id" SERIAL NOT NULL,
     "id_user" INTEGER NOT NULL,
     "id_car" INTEGER NOT NULL,
 
-    CONSTRAINT "car_enjoy_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "car_enjoys_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "user_cpf_key" ON "user"("cpf");
+CREATE UNIQUE INDEX "users_cpf_key" ON "users"("cpf");

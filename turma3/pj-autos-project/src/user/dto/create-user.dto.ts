@@ -1,7 +1,8 @@
+import { Prisma } from "@prisma/client"
 import { Type } from "class-transformer"
-import { IsNumber, IsString, IsStrongPassword, isNotEmpty } from "class-validator"
+import { IsInt, IsString, IsStrongPassword, isNotEmpty } from "class-validator"
 
-export class CreateUserDto {
+export class CreateUserDto implements Prisma.usersCreateInput {
 
     @IsString()
     name: string
@@ -9,7 +10,7 @@ export class CreateUserDto {
     @IsString()
     email: string
 
-    @IsNumber({}, { message: 'O cof não pode ser vazio' })
+    @IsInt({ message: 'O cpf não pode ser vazio' })
     @Type(() => Number)
     cpf: number
 
