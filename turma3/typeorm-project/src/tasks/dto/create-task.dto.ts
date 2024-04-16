@@ -1,4 +1,5 @@
 import { IsInt, IsNumber, IsOptional, IsString } from "class-validator";
+import { TaskEntity } from "../entities/task.entity";
 
 export class CreateTaskDto {
     @IsString()
@@ -15,5 +16,9 @@ export class CreateTaskDto {
     @IsOptional()
     @IsNumber()
     difficult?: number
+
+    @IsOptional()
+    @IsNumber()
+    user?: TaskEntity
 
 }

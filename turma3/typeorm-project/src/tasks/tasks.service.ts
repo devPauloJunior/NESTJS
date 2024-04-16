@@ -18,8 +18,12 @@ export class TasksService {
     })
   }
 
-  findAll() {
-    return this.TaskRepository.find({});
+  async findAll() {
+    return this.TaskRepository.find({
+      relations: {
+        user: true,
+      },
+    });
   }
 
   findOne(id: number) {

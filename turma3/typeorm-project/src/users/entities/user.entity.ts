@@ -2,9 +2,16 @@ import { TaskEntity } from "src/tasks/entities/task.entity"
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 
 export enum UserRole {
-    ADMIN = "admin",
-    USER = "user",
-    TEC = "tecnico",
+    ADM = "administrador",
+    USR = "usuário",
+    TEC = "técnico",
+}
+
+export enum TypeUser {
+    EST = "Estagiário",
+    JNR = "Júnior",
+    PLN = "Pleno",
+    SNR = "Senior",
 }
 
 export enum Gender {
@@ -15,7 +22,7 @@ export enum Gender {
 
 @Entity({name: 'users'})
 export class UserEntity {
-    @PrimaryGeneratedColumn('rowid')
+    @PrimaryGeneratedColumn('increment')
     registration: number
 
     @Column({
@@ -48,7 +55,9 @@ export class UserEntity {
     password: string
 
     @Column({
-        length: 4,
+        type: "enum",
+        enum: TypeUser,
+        default: TypeUser.JNR,
         nullable: true,
     })
     typeUser: string
@@ -65,7 +74,7 @@ export class UserEntity {
     @Column({
         type: "enum",
         enum: UserRole,
-        default: UserRole.USER,
+        default: UserRole.USR,
     })
     role: UserRole
 
