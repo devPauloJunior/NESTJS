@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put, Req } from "@nestjs/common";
 import { CreateUserDTO } from "./dto/create-users.dto";
 import { UpdateUserDTO } from "./dto/update-users.dto";
 import { UpdatePatchUserDTO } from "./dto/update-patch-users.dto";
 import { UsersService } from './users.service';
+import { Request } from 'express';
 
 @Controller('users')
 export class UsersController {
@@ -15,8 +16,8 @@ export class UsersController {
     }
 
     @Get()
-    async read() {
-        return this.usersService.list()
+    async findMany() {
+        return this.usersService.findAll()
     }
 
     @Get(':id')
@@ -38,4 +39,5 @@ export class UsersController {
     async  delete(@Param('id', ParseIntPipe) id: number) {
         return this.usersService.delete(id)
     }
+
 }

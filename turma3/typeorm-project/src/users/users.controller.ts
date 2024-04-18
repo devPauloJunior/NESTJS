@@ -1,7 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import path from 'path';
+import { UserEntity } from './entities/user.entity';
+
+
 
 @Controller('users')
 export class UsersController {
@@ -11,10 +15,32 @@ export class UsersController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
-
+  
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  async findByFilter(@Query() query): Promise<UserEntity | UserEntity[]> {
+    // console.log(query.email)
+    if (query.email) {
+      return this.usersService.findEmail(query.email);
+    } else if (query.name)  {
+      return this.usersService.findName(query.name);
+      } else {        
+      return this.usersService.findAll()
+    }
+  }
+
+  @Get('mytype')
+  async findByType(@Query() query): Promise<UserEntity[]> {
+    return this.usersService.findByType(query.typeUser);
+  }
+
+  @Get('mygender')
+  async findByGender(@Query() query): Promise<UserEntity[]> {
+    return this.usersService.findByGender(query.gender);
+  }
+
+  @Get('myrole')
+  async findByRole(@Query() query): Promise<UserEntity[]> {
+    return this.usersService.findByRole(query.role);
   }
 
   @Get(':id')

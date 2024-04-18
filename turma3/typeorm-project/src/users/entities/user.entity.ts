@@ -60,7 +60,7 @@ export class UserEntity {
         default: TypeUser.JNR,
         nullable: true,
     })
-    typeUser: string
+    typeUser: TypeUser
 
     @CreateDateColumn()
     createAt: Date
