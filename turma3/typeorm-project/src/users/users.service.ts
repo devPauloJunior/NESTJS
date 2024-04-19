@@ -4,7 +4,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Gender, TypeUser, UserEntity, UserRole } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import { createPasswordHashed } from 'src/utils/password';
+import { createPasswordHashed, validatePassword } from 'src/utils/password';
+import { LoginDto } from '../login/dto/login.dto';
 
 @Injectable()
 export class UsersService {
@@ -115,4 +116,6 @@ export class UsersService {
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
+
+
 }
