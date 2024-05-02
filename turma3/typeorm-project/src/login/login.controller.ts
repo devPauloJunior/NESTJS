@@ -6,7 +6,7 @@ import { LoginDto } from './dto/login.dto';
 export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 
-  @Get()
+  @Post()
   async login(@Body() loginDto: LoginDto): Promise<LoginDto> {
     // console.log(loginDto)
     return this.loginService.login(loginDto);
