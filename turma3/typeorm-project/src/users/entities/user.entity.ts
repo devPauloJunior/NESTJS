@@ -1,5 +1,5 @@
 import { TaskEntity } from "src/tasks/entities/task.entity"
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 
 export enum UserRole {
     ADM = "administrador",
@@ -22,8 +22,8 @@ export enum Gender {
 
 @Entity({name: 'users'})
 export class UserEntity {
-    @PrimaryGeneratedColumn('increment')
-    registration: number
+    @PrimaryGeneratedColumn('uuid')
+    id: number
 
     @Column({
         length: 120,
@@ -67,6 +67,9 @@ export class UserEntity {
 
     @UpdateDateColumn()
     updateAt: Date
+
+    @DeleteDateColumn()
+    deleteAt: Date
 
     @OneToMany(() => TaskEntity, (tasks) => tasks.user)
     tasks?: TaskEntity[]

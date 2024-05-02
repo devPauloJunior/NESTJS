@@ -25,7 +25,9 @@ export class UsersService {
   }
 
   async findAll() {
-    return this.userRepository.find()
+    return this.userRepository.find({
+      select: ['id', 'name', 'cpf', 'email', 'gender', 'phone', 'role', 'typeUser']
+    }) 
   }
 
   async findName(name: string): Promise<UserEntity> {
@@ -98,7 +100,7 @@ export class UsersService {
   async findOne(id: number) {
     const user = await this.userRepository.findOne({
       where: {
-        registration: id,
+        id: id,
       }
     })
 

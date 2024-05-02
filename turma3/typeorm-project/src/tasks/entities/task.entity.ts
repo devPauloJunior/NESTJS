@@ -27,7 +27,7 @@ export class TaskEntity {
     difficult: number
 
     @ManyToOne(() => UserEntity, (user) => user.tasks)
-    @JoinColumn({name: 'user_registration', referencedColumnName: 'registration'})
+    @JoinColumn({name: 'user_id', referencedColumnName: 'id'})
     user?: TaskEntity
 
 }
